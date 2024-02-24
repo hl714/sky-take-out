@@ -1,4 +1,4 @@
-package com.sky.interceptor.mapper;
+package com.sky.mapper;
 
 import com.github.pagehelper.Page;
 import com.sky.dto.EmployeePageQueryDTO;
@@ -26,4 +26,7 @@ public interface EmployeeMapper {
     Page pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     void update(Employee e);
+
+    @Select("select * from employee where id=#{id}")
+    Employee getById(Long id);
 }

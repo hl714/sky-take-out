@@ -13,7 +13,7 @@ import com.sky.entity.Employee;
 import com.sky.exception.AccountLockedException;
 import com.sky.exception.AccountNotFoundException;
 import com.sky.exception.PasswordErrorException;
-import com.sky.interceptor.mapper.EmployeeMapper;
+import com.sky.mapper.EmployeeMapper;
 import com.sky.result.PageResult;
 import com.sky.service.EmployeeService;
 import org.springframework.beans.BeanUtils;
@@ -93,6 +93,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void startORstop(Integer status, long id) {
         Employee e = Employee.builder().status(status).id(id).build();
         employeeMapper.update(e);
+    }
+
+    @Override
+    public Employee getById(Long id) {
+        Employee e=employeeMapper.getById(id);
+        e.setPassword("****");
+        return e;
+    }
+
+    @Override
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO,employee);
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
     }
 
 }
