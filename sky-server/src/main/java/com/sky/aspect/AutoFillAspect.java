@@ -32,6 +32,9 @@ public class AutoFillAspect {
         OperationType operationType = autoFill.value();
 
         Object[] args = joinPoint.getArgs();
+        if (args==null||args.length==0){
+            return;
+        }
 
         Object entity = args[0];
 
@@ -41,8 +44,8 @@ public class AutoFillAspect {
         if (operationType==OperationType.INSERT){
             try {
                 Method setCreateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_TIME, LocalDateTime.class);
-                Method setUpdateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_TIME, LocalDateTime.class);
                 Method setCreateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_USER, Long.class);
+                Method setUpdateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_TIME, LocalDateTime.class);
                 Method setUpdateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER, Long.class);
                 setCreateTime.invoke(entity,now);
                 setCreateUser.invoke(entity,currentId);
