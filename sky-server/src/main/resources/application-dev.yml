@@ -11,3 +11,11 @@ sky:
     access-key-secret: kjeRiDwX5x1f79ZzAO0hLkhkn32KRN
     access-key-id: LTAI5tJGaSWTUXYYFo9cQHLk
     bucket-name: tlias-hl
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 10
+  wechat:
+    appid: wx7d3ffac51e1b067e
+    secret: fdcdfa23bb7f82407a387a9b2397101d
