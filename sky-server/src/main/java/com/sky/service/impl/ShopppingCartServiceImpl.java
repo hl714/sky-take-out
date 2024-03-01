@@ -65,5 +65,13 @@ public class ShopppingCartServiceImpl implements ShoppingCartService {
         shoppingCart.setNumber(1);
         shoppingCart.setCreateTime(LocalDateTime.now());
         shoppingCartMapper.insert(shoppingCart);
-    };
+    }
+
+    @Override
+    public void cleanShopppingCart() {
+        Long UserId = BaseContext.getCurrentId();
+        shoppingCartMapper.deleteByUserId(UserId);
+    }
+
+    ;
 }
