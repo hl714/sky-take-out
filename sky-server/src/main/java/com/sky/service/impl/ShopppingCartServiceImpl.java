@@ -27,6 +27,15 @@ public class ShopppingCartServiceImpl implements ShoppingCartService {
     private DishMapper dishMapper;
     @Autowired
     private SetmealMapper setmealMapper;
+
+    @Override
+    public List<ShoppingCart> showShopppingCart() {
+        Long currentId = BaseContext.getCurrentId();
+        ShoppingCart s = ShoppingCart.builder().id(currentId).build();
+        List<ShoppingCart> list = shoppingCartMapper.list(s);
+        return list;
+    }
+
     public void addShoppingCart(ShoppingCartDTO shoppingCartDTO){
         ShoppingCart shoppingCart=new ShoppingCart();
         BeanUtils.copyProperties(shoppingCartDTO,shoppingCart);
